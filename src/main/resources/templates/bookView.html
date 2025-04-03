@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del libro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+-->
+
+<head>
+    <th:block th:insert="fragments/fragment :: cabecera"></th:block>
+</head>
+<nav>
+    <th:block th:insert="fragments/fragment :: navegacion"></th:block>
+</nav>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Detalles del libro</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">ID: <span th:text="${libro.id}">Id</span></h5>
+                <p class="card-text">Portada:
+
+                    <img th:src="@{/files/{filename}(filename=${libro.foto})}" alt="Imagen del libro" width="128px" />
+                </p>
+                <p class="card-text">Titulo: <span th:text="${libro.titulo}">titulo</span></p>
+                <p class="card-text">Año <span th:text="${libro.ano}">1973</span></p>
+                <p class="card-text">Autor <span th:text="${libro.autor}">yo</span></p>
+                <p class="card-text">Género: <span th:text="${libro.genero.nombre}">genero</span></p>
+                <p class="card-text">Idioma: <span th:text="${libro.idioma}">gallego</span></p>
+                <p class="card-text">Sipnosis: <span th:text="${libro.sipnosis}">etc</span></p>
+                <p class="card-text">fechaAlta<span th:text="${libro.fechaAlta}">2000</span></p>
+                <p class="card-text">Cantidad de votantes: <span th:text="${cantidadVotantes}"></span></p>
+                <p class="card-text">Suma de puntos: <span th:text="${sumaPuntos}"></span></p>
+                <p class="card-text">Media de puntos: <span th:text="${mediaPuntos}"></span></p>
+                <a class="btn btn-primary" th:href="@{/libros/editar/{id}(id=${libro.id})}">Editar</a>
+                <a class="btn btn-danger" th:href="@{/libros/borrar/{id}(id=${libro.id})}">Borrar</a>
+                <a class="btn btn-secondary mt-3" th:href="@{/public}">Inicio</a>
+                <a class="btn btn-success mb-3" th:href="@{/valoraciones/nueva/{id}(id=${libro.id})}">Añadir Nueva Valoración</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

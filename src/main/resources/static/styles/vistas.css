@@ -1,0 +1,17 @@
+body{
+width: 1200px;
+height: auto;
+}
+.mensaje{
+    width: auto;
+    font-weight: bold;
+    font-size: xx-large;
+}
+.centrado{
+    text-align: center;
+}
+.contenedor{
+    background-image: url(../img/bookAdvisor.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}

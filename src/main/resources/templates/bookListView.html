@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Listado de la biblioteca</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+-->
+
+<head>
+  <th:block th:insert="fragments/fragment :: cabecera"></th:block>
+</head>
+<nav>
+  <th:block th:insert="fragments/fragment :: navegacion"></th:block>
+</nav>
+
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">Listado de la biblioteca</h1>
+    <div th:if="${msg != null}" class="alert alert-danger" role="alert">
+      <span th:text="${msg}">Error</span>
+    </div>
+    <form method="post" th:action="@{/libros/findByName}" th:object="${findForm}" class="form-inline">
+      <div class="form-group mb-2">
+        <label for="titulo" class="sr-only">Buscar por nombre:</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" th:field="*{titulo}" placeholder="Titulo" />
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+    </form>
+    <div class="form-group">
+      <label for="genero">Género</label>
+      <select id="genero" class="form-control" onChange="changeGenero();">
+        <option value="">Todos</option>
+        <option th:each="gen : ${listaGeneros}" 
+                th:value="${gen.nombre}" 
+                th:text="${gen.nombre}" 
+                th:selected="${gen.nombre == generoSeleccionado}"></option>
+    </select>
+    
+    
+      <select id="genero" class="form-control" onChange="changeGenero();">
+        <option value="">Todos</option>
+        <option th:each="gen : ${listaGeneros}" th:value="${gen.id}" th:text="${gen.nombre}"
+          th:selected="${gen.id} == ${generoSeleccionado} ? true : false"></option>
+      </select>
+
+
+    </div>
+
+    <script>
+      function changeGenero() {
+        const select = document.getElementById("genero");
+        if (select.value == "") window.location.href = "/";
+        else window.location.href = "/findByGenero/" + select.value;
+      }
+    </script>
+
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Portada</th>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Idioma</th>
+          <th>Sipnosis</th>
+          <th>Editar</th>
+          <th>Borrar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="libro : ${listaLibros}">
+          <td th:text="${libro.id}">Id</td>
+          <td>
+            <!-- <img th:src="'/files/files/'+${libro.foto}" alt="Imagen del libro" width="64px" />-->
+            <img th:src="@{/files/{filename}(filename=${libro.foto})}" alt="Imagen del libro" width="64px" />
+          </td>
+          <td>
+            <a th:href="@{/libros/{id}(id=${libro.id})}" th:text="${libro.titulo}">Título</a>
+          </td>
+          <td th:text="${libro.autor}">Autor</td>
+          <td th:text="${libro.idioma}">Idioma</td>
+          <td th:text="${libro.sipnosis}">Sipnosis</td>
+          <td>
+            <a class="btn btn-primary" th:href="@{/libros/editar/{id}(id=${libro.id})}">Editar</a>
+          </td>
+          <td>
+            <a class="btn btn-danger" th:href="@{/libros/borrar/{id}(id=${libro.id})}">Borrar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a class="btn btn-secondary" th:href="@{/public}">Inicio</a>
+    <a class="btn btn-success" th:href="@{/libros/nuevo}">Nuevo libro</a>
+    <a class="btn btn-info" th:href="@{/valoraciones}">Ver Valoraciones</a>
+  </div>
+
+  <script th:if="${msg != null}" th:inline="javascript">
+    var msg = /*[[${msg}]]*/ "default message";
+    alert(msg);
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="fragments/fragment :: cabecera"></th:block>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+    <nav>
+        <th:block th:insert="fragments/fragment :: navegacion"></th:block>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" th:block th:fragment="login">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Mostrar solo si el usuario está autenticado -->
+                <li class="nav-item dropdown" th:if="${isAuthenticated}">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
+                       data-bs-toggle="dropdown" aria-expanded="false"  th:text="${nombre}">Usuario</a>
+                    
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" th:href="@{/usuarios/editar/{id}(id=${usuarioEditar.id})}">Editar Perfil</a></li>
+                        <li><a class="dropdown-item" th:href="@{/usuarios/cambiarContrasena}">Cambiar Contraseña</a></li>
+                        <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Mostrar solo si no hay usuario autenticado -->
+                <li class="nav-item" th:if="${!isAuthenticated}">
+                    <a class="nav-link btn btn-custom-primary" th:href="@{/login}">Login</a> <!-- Login -->
+                </li>
+                <li class="nav-item" th:if="${!isAuthenticated}">
+                    <a class="nav-link btn btn-custom-secondary" th:href="@{/usuarios/signup}">Registro</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+
+    <div class="mensaje">
+        <span>BIENVENIDO/A </span><span th:text="${cliente}"></span><span> A NUESTRA WEB</span>
+    </div>
+
+    <main class="centrado">
+        <img th:src="@{/images/bookAdvisor.png}" alt="BookAdvisor">
+    </main>
+    <footer>
+        <p>©<span th:text="${annoActual}"></span></p>
+    </footer>
+</body>
+
+</html>

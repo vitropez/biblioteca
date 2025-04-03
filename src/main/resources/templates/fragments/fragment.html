@@ -1,0 +1,50 @@
+<nav th:block th:fragment="navegacion">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" th:href="@{/public}">INICIO</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/public/informacion}">QUIENES SOMOS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/libros}">LIBROS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/public/contacto}">CONTACTO</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/usuarios}">USUARIOS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/generos}">GENÉROS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/signup}">AUTOREGISTRO</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/iniciar_sesion}">INICIAR SESIÓN</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/perfil}">PERFIL</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+    </ul>
+  
+    
+    
+    
+
+<head th:block th:fragment="cabecera">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookAdvisor</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <link rel="stylesheet" th:href="@{/styles/vistas.css}">
+ 
+
+</head>

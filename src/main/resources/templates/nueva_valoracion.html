@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!--<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Nueva Valoración</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+-->
+<head>
+    <th:block th:insert="fragments/fragment :: cabecera"></th:block>
+</head>
+<nav>
+    <th:block th:insert="fragments/fragment :: navegacion"></th:block>
+</nav>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Nueva Valoración</h1>
+        <form th:action="@{/valoraciones/crearValoracion}" th:object="${valoracion}" method="post">
+            <div class="form-group">
+                <label for="usuario">Usuario</label>
+                <!--<select id="usuario" class="form-control" th:field="*{usuario.id}" required>
+                    <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nombre}">Nombre de Usuario</option>
+                </select>-->
+                <input type="text" class="form-control" id="usuario" th:value="${usuario.nombre}" required/>
+            </div>
+            <div class="form-group">
+                <label for="libro">Libro</label>
+            <!--   <select id="libro" class="form-control" th:field="*{libro.id}" required>
+                    <option th:each="libro : ${libros}" th:value="${libro.id}" th:text="${libro.titulo}">Título del Libro</option>
+                </select>-->
+              
+                  
+                    <input type="text" class="form-control" id="libro" th:value="${libro.titulo}" readonly/>
+                    <input type="hidden" name="libroId" th:value="${libro.id}" />
+                </div>
+            <div class="form-group">
+                <label for="puntuacion">Puntuación</label>
+                <input type="number" class="form-control" id="puntuacion" th:field="*{puntuacion}" required/>
+            </div>
+            <div class="form-group">
+                <label for="comentario">Comentario</label>
+                <textarea class="form-control" id="comentario" th:field="*{comentario}" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+        <a class="btn btn-secondary mt-3" th:href="@{/valoraciones}">Volver</a>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

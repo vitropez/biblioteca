@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!--<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Género</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+-->
+
+<head>
+    <th:block th:insert="fragments/fragment :: cabecera"></th:block>
+</head>
+<nav>
+    <th:block th:insert="fragments/fragment :: navegacion"></th:block>
+</nav>
+<body>
+  <div class="container mt-5">
+    <h1 th:text="${#strings.isEmpty(genero.id) ? 'Crear Género' : 'Editar Género'}"></h1>
+    <form th:action="@{${#strings.isEmpty(genero.id) ? '/generos' : '/generos/editar'}}" th:object="${genero}" method="post">
+      <input type="hidden" th:field="*{id}" />
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" th:field="*{nombre}" />
+      </div>
+      <button type="submit" class="btn btn-primary" th:text="${#strings.isEmpty(genero.id) ? 'Crear' : 'Guardar Cambios'}"></button>
+    </form>
+    <a class="btn btn-secondary mt-3" href="/generos">Volver a la lista</a>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
